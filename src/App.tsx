@@ -3,6 +3,7 @@ import CartApp from "./Cart";
 import Counter from "./Counter";
 import CounterWithTitle from "./CounterWithTitle";
 import { Department } from "./Department";
+import { EmployeeContext } from "./EmployeeContext";
 import LoginForm from "./LoginForm";
 import Products from "./Products";
 import TimeInterval from "./TimeInterval";
@@ -40,8 +41,12 @@ function App() {
       {/* <CounterWithTitle/> */}
       {/* <TimeInterval/> */}
       {/* <CartApp/> */}
+      {/* <h2>Company Data</h2>
+      <Department employee={empData} /> */}
+      <EmployeeContext.Provider value={empData}>
       <h2>Company Data</h2>
-      <Department employee={empData} />
+      <Department />
+    </EmployeeContext.Provider>
     </div>
   );
 }
