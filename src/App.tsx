@@ -1,5 +1,6 @@
 import Button from "./Button";
 import CartApp from "./Cart";
+import { Chat } from "./Chat";
 import Counter from "./Counter";
 import CounterWithTitle from "./CounterWithTitle";
 import { Department } from "./Department";
@@ -8,6 +9,7 @@ import LoginForm from "./LoginForm";
 import Products from "./Products";
 import TimeInterval from "./TimeInterval";
 import ThemeToggler from "./Toggler";
+import { UserProvider } from "./UserContext";
 import UserProfile from "./UserProfile";
 
 const handleClick = () => {
@@ -43,10 +45,14 @@ function App() {
       {/* <CartApp/> */}
       {/* <h2>Company Data</h2>
       <Department employee={empData} /> */}
-      <EmployeeContext.Provider value={empData}>
+      {/* <EmployeeContext.Provider value={empData}>
       <h2>Company Data</h2>
       <Department />
-    </EmployeeContext.Provider>
+    </EmployeeContext.Provider> */}
+    <UserProvider>
+      <h2 style={{ textAlign: "center" }}>Chat App</h2>
+      <Chat />
+    </UserProvider>
     </div>
   );
 }
