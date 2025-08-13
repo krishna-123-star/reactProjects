@@ -1,16 +1,13 @@
-import type { EmployeeData } from "./App";
+import { useEmployee } from "./EmployeeContext";
 import { Employee } from "./Employee";
- 
-type TeamProps = {
-  employee: EmployeeData;
-};
-export const Team = ({ employee }: TeamProps) => {
+
+export const Team = () => {
+  const employee = useEmployee();
+
   return (
-    <div style={{ textAlign: "center", marginTop: "20px" }}>
-      <h2>Team : {employee.team}</h2>
-      <Employee employee={employee} />
-      </div>
+    <>
+      <h3>Team: {employee?.team}</h3>
+      <Employee />
+    </>
   );
 };
- 
- 

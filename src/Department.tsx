@@ -1,17 +1,13 @@
-import type { EmployeeData } from "./App";
+import { useEmployee } from "./EmployeeContext";
 import { Team } from "./Team";
- 
-type DepartmentProps = {
-  employee: EmployeeData;
-};
-export const Department = ({ employee }: DepartmentProps) => {
-  return (
-    <div style={{ textAlign: "center", marginTop: "20px" }}>
 
-      <h1>Department: {employee.department}</h1>
-      <Team employee={employee} />
-    </div>
+export const Department = () => {
+  const employee = useEmployee();
+
+  return (
+    <>
+      <h2>Department: {employee?.department}</h2>
+      <Team />
+    </>
   );
 };
- 
- 
