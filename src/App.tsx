@@ -5,6 +5,7 @@ import Counter from "./Counter";
 import CounterWithTitle from "./CounterWithTitle";
 import { Department } from "./Department";
 import { EmployeeContext } from "./EmployeeContext";
+import FormComponent from "./FormComponent";
 import LoginForm from "./LoginForm";
 import Products from "./Products";
 import TimeInterval from "./TimeInterval";
@@ -37,7 +38,7 @@ function App() {
       {/* <UserProfile /> */}
       {/* <Button label="Click Me" onClick={handleClick} /> */}
       {/* <Counter/> */}
-      {/* <LoginForm/> */}
+      <LoginForm/>
       {/* <ThemeToggler/> */}
       {/* <Products/> */}
       {/* <CounterWithTitle/> */}
@@ -49,10 +50,11 @@ function App() {
       <h2>Company Data</h2>
       <Department />
     </EmployeeContext.Provider> */}
-    <UserProvider>
+    {/* <UserProvider>
       <h2 style={{ textAlign: "center" }}>Chat App</h2>
       <Chat />
-    </UserProvider>
+    </UserProvider> */}
+    {/* <FormComponent/> */}
     </div>
   );
 }
