@@ -1,9 +1,10 @@
-import  { useState } from "react";
-import Product from "./Product";
+import React, { useState, useMemo } from "react";
 
-const ProductList = () => {
-  const [search, setSearch] = useState("");
-  const [cartCount, setCartCount] = useState(0);
+type Product = {
+  id: number;
+  name: string;
+  price: number;
+};
 
   const products = [
     { id: 1, name: "Laptop", price: 55000 },
@@ -11,28 +12,45 @@ const ProductList = () => {
     { id: 3, name: "Headphones", price: 2000 },
   ];
 
-  const addToCart = () => {
-    setCartCount((prev) => prev + 1);
+export default function ProductList() {
+  const [cart, setCart] = useState<Product[]>([]);
+
+  const addToCart = (product: Product) => {
+    setCart((prevCart) => [...prevCart, product]);
   };
 
-  const filteredProducts = products.filter((p) =>
-    p.name.toLowerCase().includes(search.toLowerCase())
-  );
+  const getTotalPrice = () => {
+    console.log("Calculating total price...");
+    return cart.reduce((total, item) => total + item.price, 0);
+  };
+
+  const totalPrice = useMemo(() => getTotalPrice(), [cart]);
 
   return (
     <div>
-      <input
-        type="text"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-      <h3>Cart Items: {cartCount}</h3>
-
-      {filteredProducts.map((product) => (
-        <Product key={product.id} {...product} addToCart={addToCart} />
+      <h2>Products</h2>
+      {products.map((product) => (
+        <div key={product.id} style={{ marginBottom: "10px" }}>
+          <span>
+            {product.name} - ₹{product.price}
+          </span>
+          <button
+            onClick={() => addToCart(product)}
+            style={{ marginLeft: "10px" }}
+          >
+            Add to Cart
+          </button>
+        </div>
       ))}
+
+      <hr />
+      <h3>Cart Items ({cart.length})</h3>
+      {cart.map((item, index) => (
+        <div key={index}>
+          {item.name} - ₹{item.price}
+        </div>
+      ))}
+      <h3>Total Price: ₹{totalPrice}</h3>
     </div>
   );
-};
-
-export default ProductList;
+}
