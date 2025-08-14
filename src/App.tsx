@@ -7,6 +7,7 @@ import { Department } from "./Department";
 import { EmployeeContext } from "./EmployeeContext";
 import FormComponent from "./FormComponent";
 import LoginForm from "./LoginForm";
+import ProductList from "./ProductList";
 import Products from "./Products";
 import TimeInterval from "./TimeInterval";
 import ThemeToggler from "./Toggler";
@@ -38,7 +39,7 @@ function App() {
       {/* <UserProfile /> */}
       {/* <Button label="Click Me" onClick={handleClick} /> */}
       {/* <Counter/> */}
-      <LoginForm/>
+      {/* <LoginForm/> */}
       {/* <ThemeToggler/> */}
       {/* <Products/> */}
       {/* <CounterWithTitle/> */}
@@ -55,6 +56,8 @@ function App() {
       <Chat />
     </UserProvider> */}
     {/* <FormComponent/> */}
+    <h1>E-commerce App</h1>
+      <ProductList />
     </div>
   );
 }
