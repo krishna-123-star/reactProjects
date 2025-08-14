@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import Button from "./Button";
 import CartApp from "./Cart";
 import { Chat } from "./Chat";
@@ -13,6 +14,7 @@ import TimeInterval from "./TimeInterval";
 import ThemeToggler from "./Toggler";
 import { UserProvider } from "./UserContext";
 import UserProfile from "./UserProfile";
+import TextInput from "./MyInput";
 
 const handleClick = () => {
   alert("Clicked me");
@@ -28,14 +30,19 @@ export type EmployeeData = {
 
 function App() {
   const empData: EmployeeData = {
-    id: 'XM-0144',
+    id: "XM-0144",
     name: "Manu Krishna",
     position: "Software Developer",
     department: "IT",
     team: "Frontend Team",
   };
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const handleFocus = () => {
+    inputRef.current?.focus();
+  };
   return (
-        <div style={{ textAlign: "center", marginTop: "20px" }}>
+    <div style={{ textAlign: "center", marginTop: "20px" }}>
       {/* <UserProfile /> */}
       {/* <Button label="Click Me" onClick={handleClick} /> */}
       {/* <Counter/> */}
@@ -51,13 +58,15 @@ function App() {
       <h2>Company Data</h2>
       <Department />
     </EmployeeContext.Provider> */}
-    {/* <UserProvider>
+      {/* <UserProvider>
       <h2 style={{ textAlign: "center" }}>Chat App</h2>
       <Chat />
     </UserProvider> */}
-    {/* <FormComponent/> */}
-    <h1>E-commerce App</h1>
-      <ProductList />
+      {/* <FormComponent/> */}
+      {/* <h1>E-commerce App</h1>
+      <ProductList /> */}
+      <TextInput ref={inputRef} placeholder="Type ..." />
+      <button onClick={handleFocus}>Focus the Input</button>
     </div>
   );
 }
