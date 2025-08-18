@@ -1,0 +1,43 @@
+import React, { useState } from "react";
+import { useAuth } from "./api/AuthContext";
+
+const DeleteTechnician = () => {
+  const { token } = useAuth();
+  const [response, setResponse] = useState<string>("");
+
+  const handleDelete = async () => {
+    if (!token) {
+      setResponse("No token available. Please set your token in AuthContext.");
+      return;
+    }
+
+    try {
+      const technicianId = "a5232c79-7f1a-4ae8-8d57-27563805d353"; 
+      const res = await fetch(
+        `https://zencura-dev-api.xminds.com/v1/technician?id=${technicianId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "accept": "*/*",
+            "Authorization": `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await res.json();
+      setResponse(JSON.stringify(data, null, 2));
+    } catch (error) {
+      setResponse("Error: " + error);
+    }
+  };
+
+  return (
+    <div style={{ padding: 20 }}>
+      <h2>Delete Technician</h2>
+      <button onClick={handleDelete}>Delete Technician</button>
+      <pre>{response}</pre>
+    </div>
+  );
+};
+
+export default DeleteTechnician;
