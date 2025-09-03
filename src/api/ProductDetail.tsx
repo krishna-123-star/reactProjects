@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 type Product = {
@@ -22,15 +22,14 @@ function ProductDetail() {
     }
   }, [id]);
 
-  if (!product) return <h2>Loading...</h2>;
+  if (!product) return <p>Loading product details...</p>;
 
   return (
-    <div style={{ padding: "20px"}}>
+    <div>
       <h2>{product.title}</h2>
-      <img src={product.image} alt={product.title} width="200" />
+      <img src={product.image} alt={product.title} width="150" />
       <p><strong>Price:</strong> ${product.price}</p>
       <p>{product.description}</p>
-      <br />
     </div>
   );
 }

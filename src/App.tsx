@@ -5,8 +5,10 @@ import ProductDetail from "./api/ProductDetail";
 function App() {
   return (
     <Routes>
-      <Route path="/products" element={<Products />} />
-      <Route path="/products/:id" element={<ProductDetail />} />
+
+      <Route path="/products" element={<Products />}>
+        <Route path=":id" element={<ProductDetail />} />
+      </Route>
     </Routes>
   );
 }

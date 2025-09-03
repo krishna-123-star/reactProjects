@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 type Product = {
   id: number;
@@ -20,9 +20,9 @@ function Products() {
   }, []);
 
   return (
-    <div>
-      <h1>Products List</h1>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
+    <div style={{ display: "flex", gap: "40px" }}>
+      <div style={{ flex: 1 }}>
+        <h1>Products List</h1>
         {products.map((p) => (
           <div key={p.id} style={{ border: "1px solid #ccc", padding: "10px" }}>
             <img src={p.image} alt={p.title} width="100" height="100" />
@@ -31,6 +31,10 @@ function Products() {
             <Link to={`/products/${p.id}`}>View Details</Link>
           </div>
         ))}
+      </div>
+
+      <div style={{ flex: 1, borderLeft: "2px solid #ddd", padding: "20px" }}>
+        <Outlet />
       </div>
     </div>
   );
