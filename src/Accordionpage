@@ -1,1 +1,28 @@
+import { Accordion, AccordionSummary, AccordionDetails, Typography, Box } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
+function AccordionPage() {
+  return (
+    <Box sx={{ m: 2 }}>
+      <Accordion>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography>Accordion 1</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>This is content inside Accordion 1</Typography>
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography>Accordion 2</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>This is content inside Accordion 2</Typography>
+        </AccordionDetails>
+      </Accordion>
+    </Box>
+  );
+}
+
+export default AccordionPage;
