@@ -1,0 +1,44 @@
+import { useState } from "react";
+import { Tabs, Tab, Box, TextField, Typography } from "@mui/material";
+
+function TabsPage() {
+  const [tabIndex, setTabIndex] = useState(0);
+  const [inputValue, setInputValue] = useState("");
+
+  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+    setTabIndex(newValue);
+  };
+
+  return (
+    <Box sx={{ width: "100%" }}>
+      <Tabs value={tabIndex} onChange={handleTabChange} centered>
+        <Tab label="Tab 1" />
+        <Tab label="Tab 2" />
+      </Tabs>
+
+      {/* Tab 1: Input field */}
+      {tabIndex === 0 && (
+        <Box sx={{ p: 3 }}>
+          <TextField
+            label="Enter something"
+            variant="outlined"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            fullWidth
+          />
+        </Box>
+      )}
+
+      {/* Tab 2: Display value */}
+      {tabIndex === 1 && (
+        <Box sx={{ p: 3 }}>
+          <Typography variant="h6">
+            You typed: {inputValue || "Nothing yet"}
+          </Typography>
+        </Box>
+      )}
+    </Box>
+  );
+}
+
+export default TabsPage;
