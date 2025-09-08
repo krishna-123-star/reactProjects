@@ -28,7 +28,13 @@ function Products() {
             <img src={p.image} alt={p.title} width="100" height="100" />
             <h3>{p.title}</h3>
             <p>${p.price}</p>
-            <Link to={`/products/${p.id}`}>View Details</Link>
+
+            <Link
+              to={`/products/${p.id}`}
+              state={{ product: p }} 
+            >
+              View Details
+            </Link>
           </div>
         ))}
       </div>
