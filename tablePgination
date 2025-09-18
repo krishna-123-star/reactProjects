@@ -1,0 +1,89 @@
+import * as React from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TablePagination from "@mui/material/TablePagination";
+import Paper from "@mui/material/Paper";
+import type { JSX } from "react";
+
+interface EventRow {
+  events: string;
+  dates: string;
+}
+
+function createData(events: string, dates: string): EventRow {
+  return { events, dates };
+}
+
+const rows: EventRow[] = [
+  createData("Technical Scripter", "13 October"),
+  createData("Gate Mock", "5 November"),
+  createData("Bi Wizard", "26 November"),
+  createData("Job-A-Thon14", "21 October"),
+  createData("GFG Hiring", "15 October"),
+  createData("TechnicalScripter", "13 October"),
+  createData("Gate Mock Exam", "5 November"),
+  createData("Bi Wizard School", "26 November"),
+  createData("Job-A-Thon 14", "21 October"),
+  createData("GFG Hiring Challenge", "15 October"),
+];
+
+export default function BasicTable(): JSX.Element {
+  const [pg, setpg] = React.useState<number>(0);
+  const [rpg, setrpg] = React.useState<number>(5);
+
+  function handleChangePage(
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number
+  ): void {
+    setpg(newPage);
+  }
+
+  function handleChangeRowsPerPage(
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void {
+    setrpg(parseInt(event.target.value, 10));
+    setpg(0);
+  }
+
+  return (
+    <Paper>
+      <h1 style={{ textAlign: "center", color: "green" }}>GeeksForGeeks</h1>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Event</TableCell>
+              <TableCell align="right">Date</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.slice(pg * rpg, pg * rpg + rpg).map((row, index) => (
+              <TableRow
+                key={index}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {row.events}
+                </TableCell>
+                <TableCell align="right">{row.dates}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rpg}
+        page={pg}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
+  );
+}
