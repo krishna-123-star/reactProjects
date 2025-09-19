@@ -1,41 +1,55 @@
-import { Routes, Route } from "react-router-dom";
-import { Suspense, lazy } from "react";
-import { AuthProvider } from "./api/AuthContext";
-import ProtectedRoute from "./ProtectedRoute";
-
-const LoginForm = lazy(() => import("./LoginForm"));
-const Products = lazy(() => import("./Products"));
-const ProductDetail = lazy(() => import("./api/ProductDetail"));
+import React, { useState } from "react";
+import DatePickerComp from "./pages/DatePicker";
+import DialogsPage from "./pages/Dialog";
+import BasicTable from "./pages/TablePagination";
+import { MuiResponsiveness } from "./components/MuiResponsiveness";
+import { colors, createTheme, ThemeProvider } from "@mui/material";
 
 function App() {
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [open, setOpen] = useState(false);
+
+  const theme = createTheme({
+    status:{
+      danger: '#e53e3e',
+    },
+  palette: {
+    secondary: {  
+        main: colors.orange[500]
+    },
+  neutral: {
+    main: colors.grey[500],
+    darker: colors.grey[700],
+},
+},
+});
+
   return (
-    <AuthProvider>
-        <Suspense fallback={<h2>Loading...</h2>}>
-          <Routes>
-            <Route path="/login" element={<LoginForm />} />
+    <ThemeProvider theme={theme}>
+      <MuiResponsiveness></MuiResponsiveness>
+    </ThemeProvider>
+    // <div style={{ padding: "20px" }}>
+    //   <DatePickerComp value={selectedDate} onChange={setSelectedDate} />
+    //   <p>Selected Date: {selectedDate?.toLocaleDateString()}</p>
+    // </div>
+    // <DialogsPage/>
+    // <BasicTable />
+    // <div>
+    // <Button variant="contained" onClick={() => setOpen(true)}>
+    //     Open Dialog
+    //   </Button>
 
-            <Route
-              path="/products"
-              element={
-                <ProtectedRoute>
-                  <Products />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/products/:id"
-              element={
-                <ProtectedRoute>
-                  <ProductDetail />
-                </ProtectedRoute>
-              }
-            />
-
-            {/* Default redirect */}
-            <Route path="*" element={<LoginForm />} />
-          </Routes>
-        </Suspense>
-    </AuthProvider>
+    //   <DialogComp
+    //     open={open}
+    //     onClose={() => setOpen(false)}
+    //     title="Welcome!"
+    //     content="This is a simple reusable dialog."
+    //   />
+    //   </div>
+    // <div style={{ padding: "20px" }}>
+    //   <DatePickerComp value={selectedDate} onChange={setSelectedDate} />
+    //   {selectedDate && <p>Selected Date: {selectedDate.format("YYYY-MM-DD")}</p>}
+    // </div>
   );
 }
 
